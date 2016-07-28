@@ -1,8 +1,13 @@
+"""
+FilTick Main
+"""
+
 import sys
 
-from finance import filter
-
 def main():
+    """
+    Main entry point
+    """
     return
 
 if __name__ == "__main__":

@@ -1,8 +1,11 @@
-import sys
-import json
+"""
+Contains the filter options that can be used
+to filter out tickers
+"""
+
 from abc import ABCMeta, abstractmethod
 
-class BaseFilter(object):
+class BaseFilterOption(object):
     """
     Common filter properaties
     """
@@ -10,9 +13,12 @@ class BaseFilter(object):
 
     @abstractmethod
     def get_filter_name(self):
+        """
+        Returns name of filter option
+        """
         pass
 
-class MarketCapFilter(BaseFilter):
+class MarketCapFilterOpt(BaseFilterOption):
     """
     Market capitalization
     """
@@ -26,7 +32,7 @@ class MarketCapFilter(BaseFilter):
     def get_filter_name(cls):
         return cls.NAME
 
-class EarningsPerShareFilter(BaseFilter):
+class EarningsPerShareFilterOpt(BaseFilterOption):
     """
     Earnings per share
     """
@@ -40,7 +46,7 @@ class EarningsPerShareFilter(BaseFilter):
     def get_filter_name(cls):
         return cls.NAME
 
-class StockExchangeFilter(BaseFilter):
+class StockExchangeFilterOpt(BaseFilterOption):
     """
     Stock exchange (NYSE, NASDAQ, AMEX)
     """
@@ -49,12 +55,12 @@ class StockExchangeFilter(BaseFilter):
     def __init__(self, exchanges):
         self.exchanges = []
         try:
-            for e in exchanges:
-                if e not in StockExchangeFilter.VALID_EXCHANGES:
-                    raise ValueError(e)
-                self.exchanges.append(e)
+            for exchange in exchanges:
+                if exchange not in self.VALID_EXCHANGES:
+                    raise ValueError(exchange)
+                self.exchanges.append(exchange)
         except ValueError as err:
-            print("Invalid stock exchange!!: {}".format(err.message))
+            print"Invalid stock exchange!!: {}".format(err.message)
         return
 
     @classmethod
