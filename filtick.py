@@ -1,5 +1,7 @@
 import sys
 
+from finance import filter
+
 def main():
     return
 
