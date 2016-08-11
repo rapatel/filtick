@@ -28,6 +28,12 @@ class MarketCapFilterOpt(BaseFilterOption):
         self.max = mx
         return
 
+    def get_min(self):
+        return self.min
+
+    def get_max(self):
+        return self.max
+
     @classmethod
     def get_filter_name(cls):
         return cls.NAME
@@ -42,6 +48,12 @@ class EarningsPerShareFilterOpt(BaseFilterOption):
         self.max = mx
         return
 
+    def get_min(self):
+        return self.min
+
+    def get_max(self):
+        return self.max
+
     @classmethod
     def get_filter_name(cls):
         return cls.NAME
@@ -55,13 +67,17 @@ class StockExchangeFilterOpt(BaseFilterOption):
     def __init__(self, exchanges):
         self.exchanges = []
         try:
+            # create exchange list
             for exchange in exchanges:
                 if exchange not in self.VALID_EXCHANGES:
                     raise ValueError(exchange)
                 self.exchanges.append(exchange)
         except ValueError as err:
-            print"Invalid stock exchange!!: {}".format(err.message)
+            print "Invalid stock exchange: {}".format(err.message)
         return
+
+    def get_exchange_list(self):
+        return self.exchanges
 
     @classmethod
     def get_filter_name(cls):
